@@ -1,0 +1,23 @@
+//emfanish lexis se mia grammi epanalamvanomena
+PFont font;
+
+int xPos, yPos;
+
+void setup() {
+  size(500,500);
+  background(0);
+  font = loadFont("BodoniMTCondensed-48.vlw");
+  textFont(font, 100);
+  text("Lydia", 10, 250);
+}
+  
+void draw() {  
+  background(0);
+  xPos=xPos+1;
+  yPos=250;
+  text("Lydia", xPos, yPos);
+  ellipse(mouseX, mouseY, 10, 10);
+  if (xPos>500) {
+    xPos=0;  
+  }
+}
