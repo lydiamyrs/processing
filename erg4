@@ -1,0 +1,88 @@
+/*
+Create Class that will create object with charactreristics:
+ - visualize a letter or a word
+ - speed and direction (http://processing.org/learning/topics/bounce.html)
+ - color
+ */
+PFont font;
+KinoumeniLexi lexi1, lexi2,lexi3;
+
+void setup() {
+  size(600, 600);
+  font = loadFont("Serif-48.vlw");
+  textFont(font);
+  smooth();
+
+  lexi1 = new KinoumeniLexi(12.8, 5, "ena",50);
+  lexi2 = new KinoumeniLexi(1.8, 5, "dyo",100);
+  lexi3 = new KinoumeniLexi(7 , 5, "Lydia",30);
+}
+
+void draw() {
+  background(0);
+  lexi1.draw();
+  lexi2.draw();
+  lexi3.draw();
+}
+//void mousePressed() {
+  //background (255,0,0);
+  //lexi1.startFrom0();
+  //lexi2.startFrom0();
+  //lexi3.startFrom0();
+//}
+
+void mousePressed() {
+  background(0,255,0);
+  lexi1.doubleSpeed();
+  lexi2.doubleSpeed();
+  lexi3.doubleSpeed();
+}
+  
+  
+class KinoumeniLexi {
+  int diametros;
+  float xpos, ypos;
+  float xspeed = 12.8;  // Speed of the shape
+  float yspeed = 12.2;  // Speed of the shape
+
+  int xdirection = 1;  // Left or Right
+  int ydirection = 1;  // Top to Bottom
+  
+  String word;
+
+
+
+  KinoumeniLexi(float xSpeedVar, float ySpeedVar, String wordVar, int diametrosVar) {
+    xspeed = xSpeedVar;
+    yspeed = ySpeedVar;
+    word = wordVar;
+    diametros=diametrosVar;
+  }
+
+  void draw() {
+    // Update the position of the shape
+    xpos = xpos + ( xspeed * xdirection );
+    ypos = ypos + ( yspeed * ydirection );
+
+    // Test to see if the shape exceeds the boundaries of the screen
+    // If it does, reverse its direction by multiplying by -1
+    if (xpos > width || xpos < 0) {
+      xdirection *= -1;
+    }
+    if (ypos > height || ypos < 0) {
+      ydirection *= -1;
+    }
+   fill(#98628F);
+   ellipse(xpos,ypos,diametros,diametros);
+
+    text(word, xpos, ypos);
+  }
+  //void startFrom0() {  start from right top
+    //xpos=0;
+    //ypos=0;
+    
+  void doubleSpeed() {   //double the speed of words
+    xspeed=xspeed*2;
+    yspeed=yspeed*1.2;
+  }
+}
